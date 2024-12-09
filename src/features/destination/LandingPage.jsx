@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
-import Title from "../../ui/Title";
-import Moon from "./Moon";
-import PlanetNavigation from "./PlanetNavigation";
 import styled from "styled-components";
-import TitleAndParagraph from "../../ui/Title&Paragraph";
-import LabelAndInfo from "../../ui/Label&Info";
 import useWindowWidth from "../../hooks/useWindowWidth";
+
+import Title from "../../ui/Title";
+import PlanetNavigation from "./PlanetNavigation";
+import Planet from "./Planet";
+import PlanetInfo from "./PlanetInfo";
+import PlanetMissionInfo from "./PlanetMissionInfo";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -50,30 +50,21 @@ const MissionInfo = styled.div`
 
 function LandingPage() {
   const windowWidth = useWindowWidth();
-  const location = useLocation();
-  const url = location.pathname;
 
   const size =
     windowWidth <= 450 ? "small" : windowWidth <= 768 ? "medium" : "big";
-
-  console.log(size);
 
   return (
     <>
       <Title number="01" title="pick you destination" size={size} />
 
       <StyledContainer>
-        <Moon />
+        <Planet />
         <PlanetInfoAndNav>
           <PlanetNavigation />
-          <TitleAndParagraph
-            title="MOON"
-            para="See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites."
-            size={size}
-          />
+          <PlanetInfo size={size} />
           <MissionInfo>
-            <LabelAndInfo label="AVG. Distance" info="384,400 km" />
-            <LabelAndInfo label="EST. travel time" info="3 days" />
+            <PlanetMissionInfo />
           </MissionInfo>
         </PlanetInfoAndNav>
       </StyledContainer>

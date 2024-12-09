@@ -1,7 +1,6 @@
-import Img from "../../ui/Img";
-import TitleAndParagraph from "../../ui/Title&Paragraph";
+import Img from "../../../ui/Img";
 
-import moonImg from "../../assets/destination/image-moon.png";
+import TitanImg from "../../../assets/destination/image-titan.png";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -13,12 +12,12 @@ const StyledContainer = styled.div`
   }
 `;
 
-function Moon() {
+function Titan() {
   return (
     <StyledContainer>
-      <Img src={moonImg} alt="the moon" />
+      <Img src={TitanImg} alt="Titan" />
     </StyledContainer>
   );
 }
 
-export default Moon;
+export default Titan;
