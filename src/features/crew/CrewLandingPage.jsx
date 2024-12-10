@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import Title from "../../ui/Title";
-import DouglasHurleyImg from "./DouglasHurley/DouglasHurleyImg";
+
 import DouglasHurleyInfo from "./DouglasHurley/DouglasHurleyInfo";
+import { useSearchParams } from "react-router-dom";
+import CrewNavigation from "./CrewNavigation";
+import CrewSelectedImg from "./CrewSelectedImg";
+import CrewSelectedInfo from "./CrewSelectedInfo";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -32,45 +36,6 @@ const StyledCrew = styled.div`
   }
 `;
 
-const StyledMenu = styled.div`
-  margin-top: auto;
-  ul {
-    margin-top: 40%;
-    display: flex;
-
-    align-items: center;
-    gap: 1.5rem;
-    li {
-      opacity: 17.44%;
-      background-color: aliceblue;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      transition: all 0.3s;
-      &:hover {
-        opacity: 0.5;
-        transition: all 0.3s;
-      }
-
-      &.active {
-        opacity: 1;
-        transition: all 0.3s;
-      }
-    }
-  }
-  @media only screen and (max-width: 768px) {
-    margin-top: 0;
-    ul {
-      margin-top: 0;
-      justify-content: center;
-      li {
-        width: 10px;
-        height: 10px;
-      }
-    }
-  }
-`;
-
 const StyledCrewInfoAndNav = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,8 +53,13 @@ const StyledCrewInfoAndNav = styled.div`
 function CrewLandingPage() {
   const windowWidth = useWindowWidth();
 
+  const [searchParams] = useSearchParams();
+
+  const isRole = searchParams.get("crew") || "commander";
+
   const size =
     windowWidth <= 450 ? "small" : windowWidth <= 768 ? "medium" : "big";
+
   return (
     <>
       <Title number="02" title="Meet your crew" size={size} />
@@ -97,18 +67,11 @@ function CrewLandingPage() {
       <StyledContainer>
         <StyledCrew>
           <StyledCrewInfoAndNav>
-            <DouglasHurleyInfo size={`${size}Crew`} />
-
-            <StyledMenu>
-              <ul>
-                <li className="active"></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-            </StyledMenu>
+            <CrewSelectedInfo size={`${size}Crew`} isRole={isRole} />
+            <CrewNavigation />
           </StyledCrewInfoAndNav>
-          <DouglasHurleyImg />
+
+          <CrewSelectedImg isRole={isRole} />
         </StyledCrew>
       </StyledContainer>
     </>
