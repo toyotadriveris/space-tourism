@@ -30,6 +30,11 @@ const PlanetInfoAndNav = styled.div`
     height: auto;
     width: 80%;
   }
+
+  h1 {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
 `;
 
 const MissionInfo = styled.div`
@@ -56,7 +61,7 @@ function LandingPage() {
 
   return (
     <>
-      <Title number="01" title="pick you destination" size={size} />
+      <Title number="01" title="pick your destination" size={size} />
 
       <StyledContainer>
         <Planet />

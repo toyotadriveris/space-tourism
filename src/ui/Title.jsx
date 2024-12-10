@@ -40,6 +40,8 @@ const StyledHeading = styled.h6`
   }
   ${(props) => sizes[props.className]}
 
+  ${(props) => (props.className === "big" ? "padding-top: 25px" : "")}
+
   ${(props) => (props.className === "small" ? "margin-bottom: 50px" : "")}
 `;
 
