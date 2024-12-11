@@ -9,9 +9,7 @@ const StyledMain = styled.main`
 function AppLayout() {
   return (
     <>
-      {/* header */}
       <Header />
-      {/* main */}
       <StyledMain>
         <Outlet />
       </StyledMain>
