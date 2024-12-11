@@ -14,15 +14,8 @@ const StyledContainer = styled.div`
   max-width: 450px;
   position: relative;
 
-  &:before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    bottom: 0;
-    position: absolute;
-    background: linear-gradient(0deg, #0b0e17 0%, rgba(255, 255, 255, 0) 20%);
-  }
+  -webkit-mask-image: linear-gradient(black 75%, transparent);
+  mask-image: linear-gradient(black 75%, transparent);
 
   img {
     filter: saturate(90%) hue-rotate(-5deg);

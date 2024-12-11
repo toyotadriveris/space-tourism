@@ -11,10 +11,15 @@ import imgTechCLand from "../../assets/technology/image-space-capsule-landscape.
 const ImgContainer = styled.div`
   min-width: 400px;
   max-width: 650px;
-  margin-left: auto;
+
+  @media only screen and (max-width: 1500px) {
+    margin-left: auto;
+  }
+
   @media only screen and (max-width: 768px) {
     min-width: 100%;
-    max-width: 100%;
+    max-width: auto;
+
     margin-left: 0;
   }
   @media only screen and (max-width: 450px) {

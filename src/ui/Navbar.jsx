@@ -10,6 +10,9 @@ const Nav = styled.nav`
   justify-content: flex-end;
   background-color: hsl(from white h s l / 0.05);
   backdrop-filter: blur(80px);
+  @media only screen and (min-width: 1500px) {
+    justify-content: center;
+  }
   @media only screen and (max-width: 768px) {
     padding: var(--space-400);
     max-width: auto;

@@ -25,6 +25,9 @@ function TechnologyLanding() {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
+    @media only screen and (min-width: 1500px) {
+      justify-content: space-around;
+    }
 
     @media only screen and (max-width: 768px) {
       flex-direction: column;
@@ -36,8 +39,13 @@ function TechnologyLanding() {
   const StyledTechAndNav = styled.div`
     display: flex;
     align-items: center;
-    margin-left: auto;
+
     gap: 2rem;
+
+    @media only screen and (max-width: 1500px) {
+      margin-left: auto;
+    }
+
     @media only screen and (max-width: 768px) {
       order: 1;
       flex-direction: column;
