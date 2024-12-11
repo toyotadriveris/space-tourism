@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 const StyledMenu = styled.div`
   margin-top: auto;
-  ul {
-    margin-top: 40%;
-    display: flex;
+  position: relative;
 
+  ul {
+    position: absolute;
+    display: flex;
+    top: 30px;
     align-items: center;
     gap: 1.5rem;
     li {
@@ -30,8 +32,27 @@ const StyledMenu = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
+    position: static;
     margin-top: 0;
     ul {
+      position: static;
+      top: 0;
+      margin-top: 0;
+      justify-content: center;
+      li {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    position: relative;
+    margin-top: 0;
+    ul {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translate(-50%, -50%);
       margin-top: 0;
       justify-content: center;
       li {

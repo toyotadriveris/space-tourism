@@ -29,13 +29,13 @@ const StyledContainer = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    min-width: 250px;
-    max-width: 400px;
+    min-width: 240px;
+    max-width: 350px;
   }
 
   @media only screen and (max-width: 450px) {
     min-width: 150px;
-    max-width: 280px;
+    max-width: 250px;
   }
 `;
 

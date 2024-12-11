@@ -11,6 +11,11 @@ const StyledDiv = styled.div`
     min-width: 80px;
     padding: 0 var(--space-200);
   }
+  @media only screen and (max-width: 450px) {
+    margin-top: 2px;
+    max-width: 70px;
+    padding: 0 var(--space-200);
+  }
 `;
 
 function Logo() {

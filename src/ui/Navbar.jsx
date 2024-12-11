@@ -9,7 +9,7 @@ const Nav = styled.nav`
   max-width: 50%;
   justify-content: flex-end;
   background-color: hsl(from white h s l / 0.05);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(80px);
   @media only screen and (max-width: 768px) {
     padding: var(--space-400);
     max-width: auto;

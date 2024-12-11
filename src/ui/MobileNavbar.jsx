@@ -20,7 +20,7 @@ const StyledNav = styled.div`
   right: -400px;
   display: none;
   top: 0px;
-  z-index: 1;
+  z-index: 5;
   background-color: hsl(from var(--color-blue-900) h s l / 0.15);
   backdrop-filter: blur(80px);
 

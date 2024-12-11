@@ -2,7 +2,6 @@ import styled from "styled-components";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import Title from "../../ui/Title";
 
-import DouglasHurleyInfo from "./DouglasHurley/DouglasHurleyInfo";
 import { useSearchParams } from "react-router-dom";
 import CrewNavigation from "./CrewNavigation";
 import CrewSelectedImg from "./CrewSelectedImg";
@@ -19,9 +18,9 @@ const StyledContainer = styled.div`
 const StyledCrew = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-grow: 1;
-  gap: 10%;
+  width: 100%;
 
   @media only screen and (max-width: 768px) {
     flex-direction: column;
