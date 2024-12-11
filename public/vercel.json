@@ -6,9 +6,10 @@
     }
   ],
   "routes": [
-    { "src": "/login", "dest": "/" },
-    { "src": "/login/phone-verification", "dest": "/" },
-    { "src": "/topics", "dest": "/" },
+    { "src": "/home", "dest": "/" },
+    { "src": "/destination", "dest": "/" },
+    { "src": "/crew", "dest": "/" },
+    { "src": "/technology", "dest": "/" },
     { "src": "/", "dest": "/" }
   ]
 }
