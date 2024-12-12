@@ -34,6 +34,16 @@ const StyledDiv = styled.div`
   @media only screen and (max-width: 500px) {
     gap: 1.5rem;
   }
+
+  @media only screen and (max-height: 750px) {
+    gap: 0.5rem;
+    span {
+      font-size: 14px;
+    }
+    h1 {
+      font-size: 56px;
+    }
+  }
 `;
 
 function MainText() {

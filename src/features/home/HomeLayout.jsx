@@ -41,6 +41,7 @@ const StyledContainer = styled.div`
       }
       p {
         font-size: 15px;
+        padding: 0 0;
       }
     }
   }
