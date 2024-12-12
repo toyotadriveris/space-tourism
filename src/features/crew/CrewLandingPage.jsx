@@ -121,8 +121,8 @@ function CrewLandingPage() {
   );
 
   useEffect(() => {
-    window.addEventListener("touchstart", handleTouchStart, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
