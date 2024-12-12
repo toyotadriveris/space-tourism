@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import iconHamburger from "../assets/shared/icon-hamburger.svg";
 import iconClose from "../assets/shared/icon-close.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import useWindowHeight from "../hooks/useWindowHeight";
 
 const StyledButton = styled.button`
   background: transparent;
@@ -87,13 +88,35 @@ const Ul = styled.ul`
 
 function MobileNavbar() {
   const [showMenu, setShowMenu] = useState(false);
+  const [height, setHeight] = useState(0);
+
   const animateAside = useRef();
+
+  const screen = showMenu ? "none" : "block";
 
   gsap.registerPlugin(useGSAP);
 
-  // animations
+  useEffect(() => {
+    const calculateHeight = () => {
+      const body = document.body;
+      const html = document.documentElement;
 
-  const screen = showMenu ? "none" : "block";
+      const documentHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      );
+
+      setHeight(documentHeight);
+    };
+
+    calculateHeight();
+
+    window.addEventListener("resize", calculateHeight);
+    return () => window.removeEventListener("resize", calculateHeight);
+  }, [showMenu]);
 
   const toggleAside = () => {
     console.log(screen);
@@ -111,29 +134,29 @@ function MobileNavbar() {
         <img src={iconHamburger} alt="open mobile menu button" />
       </StyledButton>
       <>
-        <StyledNav ref={animateAside}>
+        <StyledNav style={{ height: `${height}px` }} ref={animateAside}>
           <div>
             <StyledButton onClick={toggleAside}>
               <img src={iconClose} alt="close mobile menu button" />
             </StyledButton>
             <Ul>
               <li>
-                <NavButton to="/home">
+                <NavButton onClick={toggleAside} to="/home">
                   <span>00</span> home
                 </NavButton>
               </li>
               <li>
-                <NavButton to="/destination">
+                <NavButton onClick={toggleAside} to="/destination">
                   <span>01</span> destination
                 </NavButton>
               </li>
               <li>
-                <NavButton to="/crew">
+                <NavButton onClick={toggleAside} to="/crew">
                   <span>02</span> crew
                 </NavButton>
               </li>
               <li>
-                <NavButton to="/technology">
+                <NavButton onClick={toggleAside} to="/technology">
                   <span>03</span> technology
                 </NavButton>
               </li>

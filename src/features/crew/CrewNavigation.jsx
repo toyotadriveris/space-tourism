@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -34,6 +35,7 @@ const StyledMenu = styled.div`
   @media only screen and (max-width: 768px) {
     position: static;
     margin-top: 0;
+    padding-bottom: 25px;
     ul {
       position: static;
       top: 0;
@@ -48,6 +50,7 @@ const StyledMenu = styled.div`
   @media only screen and (max-width: 450px) {
     position: relative;
     margin-top: 0;
+    padding-bottom: 0px;
     ul {
       position: absolute;
       top: -25px;
@@ -66,6 +69,10 @@ const StyledMenu = styled.div`
 function CrewNavigation() {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [startX, setStartX] = useState(0);
+
+  const ref = useRef(null);
+
   function handleClick(role) {
     searchParams.set("crew", role);
     setSearchParams(searchParams);
@@ -73,9 +80,51 @@ function CrewNavigation() {
 
   const isRole = searchParams.get("crew") || "commander";
 
+  // touch events
+  const handleTouchStart = useCallback((e) => {
+    if (!ref.current.contains(e.target)) {
+      return;
+    }
+    e.preventDefault();
+    setStartX(e.touches[0].clientX);
+  }, []);
+
+  const onSwipe = useCallback((deltaX) => {
+    if (deltaX > 0) {
+      console.log("moveRight");
+    } else {
+      console.log("moveLeft");
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (!ref.current.contains(e.target)) {
+        return;
+      }
+      e.preventDefault();
+
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = endX - startX;
+
+      onSwipe(deltaX);
+    },
+    [startX, onSwipe]
+  );
+
+  useEffect(() => {
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [handleTouchStart, handleTouchEnd]);
+
   return (
     <>
-      <StyledMenu>
+      <StyledMenu ref={ref}>
         <ul>
           <li
             onClick={() => handleClick("commander")}

@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import CrewNavigation from "./CrewNavigation";
 import CrewSelectedImg from "./CrewSelectedImg";
 import CrewSelectedInfo from "./CrewSelectedInfo";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -51,19 +52,81 @@ const StyledCrewInfoAndNav = styled.div`
 
 function CrewLandingPage() {
   const windowWidth = useWindowWidth();
+  const [startX, setStartX] = useState(0);
 
-  const [searchParams] = useSearchParams();
+  const ref = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const isRole = searchParams.get("crew") || "commander";
 
   const size =
     windowWidth <= 450 ? "small" : windowWidth <= 768 ? "medium" : "big";
 
+  // touch events
+  const handleTouchStart = useCallback((e) => {
+    if (!ref.current.contains(e.target)) {
+      return;
+    }
+    e.preventDefault();
+    setStartX(e.touches[0].clientX);
+  }, []);
+
+  const onSwipe = useCallback(
+    (deltaX) => {
+      const allParams = [
+        "commander",
+        "mission-specialist",
+        "pilot",
+        "flight-engineer",
+      ];
+
+      const curr = isRole;
+      const currIndex = allParams.indexOf(curr);
+      let targetEl;
+
+      if (deltaX > 0) {
+        console.log("moveRight");
+        targetEl = allParams[(currIndex + 1) % allParams.length];
+      } else {
+        targetEl =
+          allParams[(currIndex - 1 + allParams.length) % allParams.length];
+      }
+      searchParams.set("crew", targetEl);
+      setSearchParams(searchParams);
+    },
+    [isRole, searchParams, setSearchParams]
+  );
+
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (!ref.current.contains(e.target)) {
+        return;
+      }
+      e.preventDefault();
+
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = endX - startX;
+
+      onSwipe(deltaX);
+    },
+    [startX, onSwipe]
+  );
+
+  useEffect(() => {
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [handleTouchStart, handleTouchEnd]);
+
   return (
     <>
       <Title number="02" title="Meet your crew" size={size} />
 
-      <StyledContainer>
+      <StyledContainer ref={ref}>
         <StyledCrew>
           <StyledCrewInfoAndNav>
             <CrewSelectedInfo size={`${size}Crew`} isRole={isRole} />

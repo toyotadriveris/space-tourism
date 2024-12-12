@@ -51,7 +51,8 @@ body {
   background-color: var(--color-blue-900);
 }
 
-#root {
+#root,
+main {
   height: 100%;
 }
 input,
@@ -84,3 +85,15 @@ ul {
 img {
   max-width: 100%;
 }
+
+/* @media only screen and (max-width: 768px) {
+  html {
+    height: auto;
+  }
+} */
+
+/* @media only screen and (max-height: 800px) {
+  html {
+    height: auto;
+  }
+} */

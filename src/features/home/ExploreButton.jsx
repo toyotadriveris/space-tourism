@@ -7,7 +7,8 @@ const CircleButton = styled.button`
   align-content: center;
   background-color: white;
   width: 272px;
-  height: 272px;
+  min-height: 272px;
+  max-height: 272px;
   outline: none;
   border: none;
   border-radius: 50%;
@@ -43,7 +44,8 @@ const CircleButton = styled.button`
 
   @media only screen and (max-width: 500px) {
     width: 164px;
-    height: 164px;
+    min-height: 164px;
+    max-height: 164px;
     font-size: 18px;
     &:hover {
       &::before {

@@ -13,7 +13,7 @@ const StyledContainer = styled.div`
   justify-content: center;
   gap: 8%;
   flex-grow: 1;
-
+  padding-top: 2rem;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
     text-align: center;
@@ -42,6 +42,7 @@ const MissionInfo = styled.div`
   align-items: center;
   border-top: 1px solid hsla(from white h s l / 0.25);
   padding-top: 2.5rem;
+  padding-bottom: 2rem;
   gap: 5rem;
   @media only screen and (max-width: 768px) {
     justify-content: space-around;

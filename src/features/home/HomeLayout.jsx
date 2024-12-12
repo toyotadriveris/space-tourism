@@ -16,7 +16,7 @@ const StyledContainer = styled.div`
     min-width: auto;
     max-width: auto;
 
-    padding-top: var(--space-1200);
+    padding-top: var(--space-1600);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -29,10 +29,10 @@ const StyledContainer = styled.div`
       padding: 0 10%;
     }
     @media only screen and (max-width: 500px) {
-      padding-top: var(--space-800);
+      /* padding-top: var(--space-800); */
       flex-grow: 1;
       justify-content: space-evenly;
-      max-width: 100% !important;
+      /* max-width: 100% !important; */
       span {
         font-size: 16px;
       }
