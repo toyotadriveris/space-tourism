@@ -53,6 +53,7 @@ const StyledCrewInfoAndNav = styled.div`
 function CrewLandingPage() {
   const windowWidth = useWindowWidth();
   const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
 
   const ref = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -69,6 +70,7 @@ function CrewLandingPage() {
     }
     e.preventDefault();
     setStartX(e.touches[0].clientX);
+    setStartY(e.touches[0].clientY);
   }, []);
 
   const onSwipe = useCallback(
@@ -85,7 +87,6 @@ function CrewLandingPage() {
       let targetEl;
 
       if (deltaX > 0) {
-        console.log("moveRight");
         targetEl = allParams[(currIndex + 1) % allParams.length];
       } else {
         targetEl =
@@ -105,11 +106,18 @@ function CrewLandingPage() {
       e.preventDefault();
 
       const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+
       const deltaX = endX - startX;
+      const deltaY = endY - startY;
+
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        return;
+      }
 
       onSwipe(deltaX);
     },
-    [startX, onSwipe]
+    [startX, startY, onSwipe]
   );
 
   useEffect(() => {
